@@ -94,8 +94,8 @@ def train_loop(images_path, epochs: int, pretrained_discriminator=None, pretrain
                 loss_real += loss_real_data_
 
 
-                loss_fake /= len(batch)*DCGAN_CONFIG["discriminator_steps"]
-                loss_real /= len(batch)*DCGAN_CONFIG["discriminator_steps"]
+            loss_fake /= len(batch)*DCGAN_CONFIG["discriminator_steps"]
+            loss_real /= len(batch)*DCGAN_CONFIG["discriminator_steps"]
 
             # train the generator | by descending its stochastic gradient
             mpz = generate_normal_noise(len(batch), DCGAN_CONFIG["latent_dim"]).view(len(batch), DCGAN_CONFIG["latent_dim"], 1, 1)
@@ -119,9 +119,9 @@ def train_loop(images_path, epochs: int, pretrained_discriminator=None, pretrain
                 ims = batch_to_images(generated_images, mean=r_mean[0], std=r_std[0], deprocess=True)
                 show_images(DCGAN_CONFIG["display_batch_size"], ims, title=f"Generator Samples - Epoch {epoch + 1}")
 
-                logger.info(f"Epoch {epoch + 1} | | -- Loss Fake data {loss_fake_data / len(train_dl):.8f}")
-                logger.info(f"Epoch {epoch + 1} | | -- Loss Real data {loss_real_data / len(train_dl):.8f}")
-                logger.info(f"Epoch {epoch + 1} | | -- Loss Generator {loss_generator / len(train_dl):.8f}")
+                logger.info(f"Epoch {epoch + 1} | | -- Loss Fake data {loss_fake_data:.8f}")
+                logger.info(f"Epoch {epoch + 1} | | -- Loss Real data {loss_real_data:.8f}")
+                logger.info(f"Epoch {epoch + 1} | | -- Loss Generator {loss_generator:.8f}")
 
         if pretrained_discriminator:
 
