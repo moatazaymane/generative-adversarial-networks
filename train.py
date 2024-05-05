@@ -109,9 +109,10 @@ def train_loop(images_path, epochs: int, pretrained_discriminator=None, pretrain
             loss_fake_data += loss_fake
             loss_generator += loss_gen
 
-            Loss["loss_real_data"][(epoch + 1)*(iteration + 1)] = loss_real_data
-            Loss["loss_fake_data"][(epoch + 1)*(iteration + 1)] = loss_fake_data
-            Loss["loss_generator"][(epoch + 1)*(iteration + 1)] = loss_generator
+            Loss["loss_real_data"][prev_iteration + 1] = loss_real_data
+            Loss["loss_fake_data"][prev_iteration + 1] = loss_fake_data
+            Loss["loss_generator"][prev_iteration + 1] = loss_generator
+            prev_iteration += 1
 
             if (iteration) % log_freq == 0:
 
